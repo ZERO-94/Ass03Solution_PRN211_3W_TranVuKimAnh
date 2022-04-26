@@ -8,16 +8,6 @@
 }
 
 <h1>Orders</h1>
-<form asp-controller="Orders" asp-action="Index" method="get" class="d-flex align-items-center flex-column search-form">
-	<h6>Filter by OrderDate</h6>
-	<div>
-		Start Date: <input type="date" name="startDate" id="startDate" class="mx-2" required />
-		End Date: <input type="date" name="endDate" id="endDate" class="mx-2" required />
-		<input type="hidden" name="Search" id="Search" class="mx-2" value="true" required />
-		<input type="submit" value="Search" class="btn btn-info" />
-	</div>
-</form>
-<p id="filterMessage" class="text-center text-danger mt-2">@ViewBag.Message</p>
 
 @{
 	var session = HttpContextAccessor.HttpContext.Session;
@@ -50,9 +40,6 @@
 			<th>
 				@Html.DisplayNameFor(model => model.Freight)
 			</th>
-			<th>
-				Email
-			</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -73,15 +60,12 @@
 					@Html.DisplayFor(modelItem => item.Freight)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.Member.Email)
-				</td>
-				<td>
-					<a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-secondary">Details</a>
+					<a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
 					@{
 						session = HttpContextAccessor.HttpContext.Session;
 						if (session.GetString("Role") == "Admin")
 						{
-							<a asp-action="Delete" asp-route-id="@item.OrderId" class="btn btn-danger">Delete</a>
+							<a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
 						}
 					}
 				</td>

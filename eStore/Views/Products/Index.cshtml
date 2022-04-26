@@ -75,16 +75,16 @@
 							{
 								@if (item.UnitsInStock == 0)
 								{
-									<a asp-route="addCart" asp-route-productId="@item.ProductId" class="btn btn-success disabled">Add to cart</a>
+									<a asp-route="addCart" asp-route-productId="@item.ProductId">Add to cart</a>
 								}
 								else
 								{
-									<a asp-route="addCart" asp-route-productId="@item.ProductId" class="btn btn-success">Add to cart</a>
+									<a asp-route="addCart" asp-route-productId="@item.ProductId">Add to cart</a>
 								}
 							}
-							<a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-warning">Edit</a>
-							<a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-secondary">Details</a>
-							<a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+							<a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+							<a asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+							<a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
 						</td>
 					}
 				}
