@@ -1,0 +1,15 @@
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\BusinessObject.deps.json
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\BusinessObject.runtimeconfig.json
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\BusinessObject.runtimeconfig.dev.json
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\BusinessObject.dll
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\ref\BusinessObject.dll
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\bin\x86\Debug\net5.0\BusinessObject.pdb
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.csproj.AssemblyReference.cache
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.AssemblyInfoInputs.cache
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.AssemblyInfo.cs
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.dll
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\ref\BusinessObject.dll
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.pdb
+D:\C#\Ass03Solution_PRN211_3W_TranVuKimAnh\BusinessObject\obj\x86\Debug\net5.0\BusinessObject.genruntimeconfig.cache

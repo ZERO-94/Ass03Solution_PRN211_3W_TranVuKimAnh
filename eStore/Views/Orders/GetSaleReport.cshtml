@@ -1,0 +1,72 @@
+﻿@model List<BusinessObject.ProductForReport>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+
+@{
+	ViewData["Title"] = "Orders";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-controller="Orders" asp-action="Index">Go back</a>
+
+<h1>Sale report</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				<h5>Product Id</h5>
+			</th>
+			<th>
+				<h5>Product Name</h5>
+			</th>
+			<th>
+				<h5>Unit Price</h5>
+			</th>
+			<th>
+				<h5>Sold amount</h5>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UnitPrice)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SoldAmount)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+@section Scripts {
+<script>
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+		get: (searchParams, prop) => searchParams.get(prop),
+	});
+	var errorEl = document.getElementById("filterMessage");
+	if(params.startDate === null && params.startDate === null) {
+		errorEl.style.display = "none";
+	}
+
+	var startDateEl = document.getElementById("startDate");
+	var endDateEl = document.getElementById("endDate");
+	if(params.startDate !== null) {
+		startDateEl.value = params.startDate;
+	}
+	if(params.endDate !== null) {
+		endDateEl.value = params.endDate;
+	}
+</script>
+}

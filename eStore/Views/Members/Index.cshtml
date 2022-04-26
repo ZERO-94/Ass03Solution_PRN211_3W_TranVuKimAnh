@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BusinessObject.Models.Member>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Members</h1>
+
+<p>
+    <a asp-action="Create"  class="btn btn-primary">Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MemberId" class="btn btn-warning">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.MemberId" class="btn btn-secondary">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.MemberId" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BusinessObject.Models.Order>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+	ViewData["Title"] = "Orders";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Orders</h1>
+<form asp-controller="Orders" asp-action="Index" method="get" class="d-flex align-items-center flex-column search-form">
+	<h6>Filter by OrderDate</h6>
+	<div>
+		Start Date: <input type="date" name="startDate" id="startDate" class="mx-2" required />
+		End Date: <input type="date" name="endDate" id="endDate" class="mx-2" required />
+		<input type="hidden" name="Search" id="Search" class="mx-2" value="true" required />
+		<input type="submit" value="Search" class="btn btn-info" />
+	</div>
+</form>
+<p id="filterMessage" class="text-center text-danger mt-2">@ViewBag.Message</p>
+
+@{
+	var session = HttpContextAccessor.HttpContext.Session;
+	if (session.GetString("Role") == "Admin")
+	{
+		<form asp-controller="Orders" asp-action="GetSaleReport" method="get" class="d-flex align-items-center flex-column search-form">
+			<h6>Get Sale Report</h6>
+			<div>
+				Start Date: <input type="date" name="startDate" id="startDate" class="mx-2" required />
+				End Date: <input type="date" name="endDate" id="endDate" class="mx-2" required />
+				<input type="submit" value="Get" class="btn btn-info" />
+			</div>
+		</form>
+	}
+
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.RequiredDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ShippedDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Freight)
+			</th>
+			<th>
+				Email
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RequiredDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShippedDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Freight)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Member.Email)
+				</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-secondary">Details</a>
+					@{
+						session = HttpContextAccessor.HttpContext.Session;
+						if (session.GetString("Role") == "Admin")
+						{
+							<a asp-action="Delete" asp-route-id="@item.OrderId" class="btn btn-danger">Delete</a>
+						}
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+@section Scripts {
+<script>
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+		get: (searchParams, prop) => searchParams.get(prop),
+	});
+	var errorEl = document.getElementById("filterMessage");
+	if(params.startDate === null && params.startDate === null) {
+		errorEl.style.display = "none";
+	}
+
+	var startDateEl = document.getElementById("startDate");
+	var endDateEl = document.getElementById("endDate");
+	if(params.startDate !== null) {
+		startDateEl.value = params.startDate;
+	}
+	if(params.endDate !== null) {
+		endDateEl.value = params.endDate;
+	}
+</script>
+}

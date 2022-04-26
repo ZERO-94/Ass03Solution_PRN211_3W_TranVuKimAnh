@@ -1,0 +1,141 @@
+﻿@model List<eStore.Models.CartItem>
+@{
+	ViewData["Title"] = "Cart";
+}
+
+<h2>Cart</h2>
+@if (Model.Count > 0)
+{
+	decimal totalPrice = 0;
+	int stt = 1;
+
+	<table class="table">
+		<tr>
+			<th>#</th>
+			<th>Product</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Discount (%)</th>
+			<th>Total</th>
+			<th></th>
+		</tr>
+		@foreach (var cartitem in Model)
+		{
+			var priceOfProducts = (cartitem.quantity * cartitem.product.UnitPrice) - ((cartitem.quantity * cartitem.product.UnitPrice) * cartitem.discount / 100);
+			var discount = cartitem.discount;
+			totalPrice += priceOfProducts;
+
+			<tr>
+				<form asp-action="UpdateCartItem" asp-controller="Cart" method="post">
+				<td>@(stt++)</td>
+				<td>@cartitem.product.ProductName</td>
+				<td>@(cartitem.product.UnitPrice)</td>
+				<td><input name="quantity" value="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductId}")" type="number" /></td>
+				<td>
+					<input name="discount" value="@cartitem.discount" id="@($"discount-{cartitem.product.ProductId}")" />
+					<input name="productId" value="@cartitem.product.ProductId" hidden />
+				</td>
+				<td>@(priceOfProducts.ToString("n2"))</td>
+				<td>
+					<button class="btn btn-success updatecartitem" type="submit">
+						Update
+					</button>
+					<a asp-route="removeItem" asp-route-productId="@cartitem.product.ProductId" class="btn btn-danger">Delete</a>
+				</td>
+				</form>
+			</tr>
+		}
+		<tr>
+			<td colspan="4" class="text-right">Total cost</td>
+			<td>@(totalPrice.ToString("n2"))</td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="text-center text-danger" role="alert">@ViewData["OutStockMess"]</div>
+
+	<h3>Customer information</h3>
+	<p id="customerInformationMessage" class="text-center text-danger ml-2"></p>
+	<form asp-controller="Cart" asp-action="Cart">
+		<div class="form-group">
+			<label class="control-label">Customer Email</label>
+			<select name="customerId" asp-items="ViewBag.CustomerList" id="customerId" class="custom-select">
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Order date</label>
+			<input class="form-control" type="date" name="orderDate" id="orderDate" required />
+		</div>
+		<div class="form-group">
+			<label class="control-label">Required Date</label>
+			<input class="form-control" type="date" name="requiredDate" id="requiredDate" required />
+		</div>
+		<div class="form-group">
+			<label class="control-label">Shipped Date</label>
+			<input class="form-control" type="date" name="shippedDate" id="shippedDate" required />
+		</div>
+		<div class="form-group">
+			<label class="control-label">Freight</label>
+			<input class="form-control" type="text" name="freight" id="freight" />
+		</div>
+	</form>
+	<button class="btn btn-success checkout">
+		Add order
+	</button>
+
+	@section Scripts {
+<script>
+	function isValidDate(d) {
+		return d instanceof Date && !isNaN(d);
+	}
+
+	$(document).ready(function () {
+		$(".checkout").click(function (event) {
+			var customerId = $("#customerId").val();
+			var orderDate = $("#orderDate").val();
+			var shippedDate = $("#shippedDate").val();
+			var requiredDate = $("#requiredDate").val();
+			var freight = $("#freight").val();
+
+			if(!isValidDate(new Date(orderDate))) {
+				$("#customerInformationMessage").html("Order Date is invalid!");
+				return;
+			} else if (!isValidDate(new Date(requiredDate))) {
+				$("#customerInformationMessage").html("Required Date is invalid!");
+				return;
+			} else if (!isValidDate(new Date(shippedDate))) {
+				$("#customerInformationMessage").html("Shipped Date is invalid!");
+				return;
+			} else if (new Date(orderDate) > new Date(requiredDate) || new Date(orderDate) > new Date(shippedDate)) {
+				$("#customerInformationMessage").html("Order Date must before Required and Shipped Date!");
+				return;
+			}
+
+			$.ajax({
+				type: "POST",
+				url:"@Url.RouteUrl("addorder")",
+				data: {
+					customerId: customerId,
+					orderDate: orderDate,
+					shippedDate: shippedDate,
+					requiredDate: requiredDate,
+					freight: freight
+				},
+				success: function (result) {
+					window.location.href = "@Url.RouteUrl("products")";
+				}
+			});
+		});
+	});
+</script>
+<script>
+	document.getElementById("orderDate").valueAsDate = new Date();
+	document.getElementById("requiredDate").valueAsDate = new Date();
+	document.getElementById("shippedDate").valueAsDate = new Date();
+</script>
+    }
+
+}
+else
+{
+	<h5 class="alert alert-danger text-center mt-3">Cart is empty, start adding one.</h5>
+}

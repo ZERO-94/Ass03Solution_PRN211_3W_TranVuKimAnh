@@ -1,0 +1,20 @@
+﻿@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex flex-column align-items-center" style="width: 100%; margin-top: 12%;">
+	<h1 class="text-center display-4 mb-5">Login</h1>
+	<form asp-controller="Members" asp-action="Login" style="width: 60%">
+		<div class="form-group d-flex align-items-center justify-content-center">
+			<input class="form-control" name="email" style="width: 70%;" placeholder="Email" required/>
+		</div>
+		<div class="form-group d-flex align-items-center justify-content-center">
+			<input class="form-control" type="password" name="password" style="width: 70%;" placeholder="Password" required/>
+		</div>
+		<div class="text-center text-danger my-4">@ViewBag.Message</div>
+		<div class="d-flex justify-content-center">
+			<input type="submit" class="btn btn-primary px-3" style="width: 30%; background: #001F75 !important;" value="Login" />
+		</div>
+	</form>
+</div>

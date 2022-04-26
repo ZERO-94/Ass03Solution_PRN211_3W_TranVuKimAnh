@@ -1,0 +1,95 @@
+﻿@model BusinessObject.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequiredDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequiredDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShippedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShippedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Freight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Freight)
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.Email)
+        </dd>
+    </dl>
+    <div>
+        <h3>Details: </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        OrderID
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Unit Price
+                    </th>
+                    <th>
+                        Discount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var orderDetail in ViewBag.OrderDetailList)
+                {
+                <tr>
+                    <td>
+                        @orderDetail.OrderId
+                    </td>
+                    <td>
+                        @orderDetail.Product.ProductName
+                    </td>
+                    <td>
+                        @orderDetail.Quantity
+                    </td>
+                    <td>
+                        @orderDetail.UnitPrice
+                    </td>
+                    <td>
+                        @orderDetail.Discount
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-light">Back to List</a>
+</div>

@@ -1,0 +1,60 @@
+﻿@model BusinessObject.Models.Product
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<h4>Products</h4>
+<div>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.CategoryId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.CategoryId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.ProductName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.ProductName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Weight)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Weight)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UnitPrice)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UnitPrice)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UnitsInStock)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UnitsInStock)
+		</dd>
+	</dl>
+</div>
+<div>
+	<a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-warning">Edit</a>
+	@if (Model.UnitsInStock == 0)
+	{
+		<a asp-route="addCart"
+	   asp-route-productId="@Model.ProductId"
+	   class="btn btn-success disabled">Add to cart</a>
+	}
+	else
+	{
+		<a asp-route="addCart"
+	   asp-route-productId="@Model.ProductId"
+	   class="btn btn-success">Add to cart</a>
+	}
+	<a asp-action="Index" class="btn btn-light">Back to List</a>
+</div>

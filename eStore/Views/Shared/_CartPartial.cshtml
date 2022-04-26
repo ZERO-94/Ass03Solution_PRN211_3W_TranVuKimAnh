@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using eStore.Models
+@inject IHttpContextAccessor HttpContextAccessor
+
+<div class="nav-item">
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string role = session.GetString("Role");
+     string jsoncart = session.GetString("cart");
+    if (role == "Admin" && jsoncart == null)
+    {
+        <a asp-route="cart" style="color: #FFF !important;">Cart (0)</a>
+    }
+    if (jsoncart != null)
+    {
+        var cart = JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+        <a asp-route="cart" style="color: #FFF !important;">Cart (@cart.Count)</a>
+    }
+}
+</div>

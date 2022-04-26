@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BusinessObject.Models.Product>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Products</h1>
+<form asp-controller="Products" asp-action="Index" method="get">
+	<p class="d-flex align-items-center">
+		Products: <input type="text" name="searchString" id="searchProductsInput" class="mx-2" required />
+		<input type="submit" value="Search" class="btn btn-info" />
+	<p id="error" class="text-center text-danger ml-2">@ViewBag.Message</p>
+	</p>
+</form>
+<p>
+	<a asp-action="Create" class="btn btn-primary">Create</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.CategoryId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Weight)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UnitPrice)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UnitsInStock)
+			</th>
+
+			@{
+				var session = HttpContextAccessor.HttpContext.Session;
+				string role = session.GetString("Role");
+				if (role == "Admin")
+				{
+					<th></th>
+				}
+			}
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.CategoryId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Weight)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UnitPrice)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UnitsInStock)
+				</td>
+
+				@{
+					if (role == "Admin")
+					{
+						<td>
+							@if (session.GetString("Role") == "Admin")
+							{
+								@if (item.UnitsInStock == 0)
+								{
+									<a asp-route="addCart" asp-route-productId="@item.ProductId" class="btn btn-success disabled">Add to cart</a>
+								}
+								else
+								{
+									<a asp-route="addCart" asp-route-productId="@item.ProductId" class="btn btn-success">Add to cart</a>
+								}
+							}
+							<a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-warning">Edit</a>
+							<a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-secondary">Details</a>
+							<a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+						</td>
+					}
+				}
+
+			</tr>
+		}
+	</tbody>
+</table>
+
+<script>
+	const params = new Proxy(new URLSearchParams(window.location.search), {
+		get: (searchParams, prop) => searchParams.get(prop),
+	});
+	var errorEl = document.getElementById("error");
+	if(params.searchString === null) {
+		errorEl.style.display = "none";
+	}
+
+	var searchProductsEl = document.getElementById("searchProductsInput");
+	if(params.searchString !== null) {
+		searchProductsEl.value = params.searchString;
+	}
+</script>

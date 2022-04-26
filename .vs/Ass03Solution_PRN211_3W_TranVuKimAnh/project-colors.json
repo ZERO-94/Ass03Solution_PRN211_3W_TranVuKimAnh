@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "fd85cda7-d921-4669-be58-4f15eb1fec64": {
+      "ProjectGuid": "fd85cda7-d921-4669-be58-4f15eb1fec64",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 0
+    },
+    "6005ec92-82cf-4a7f-8991-bbb627206e78": {
+      "ProjectGuid": "6005ec92-82cf-4a7f-8991-bbb627206e78",
+      "DisplayName": "BusinessObject",
+      "ColorIndex": 1
+    },
+    "d9bb2ab0-2089-4b10-90cc-cb0af92210d7": {
+      "ProjectGuid": "d9bb2ab0-2089-4b10-90cc-cb0af92210d7",
+      "DisplayName": "eStore",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "11dea276-3511-476f-bb00-d7e2b21e26d3": {
+      "ProjectGuid": "11dea276-3511-476f-bb00-d7e2b21e26d3",
+      "DisplayName": "DataAccess",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}
